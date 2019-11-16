@@ -1,0 +1,210 @@
+<Screenmanager>:
+    Screen1:
+        name: 'Screen1'
+        id: Screen1
+
+    Screen2:
+        name: 'Screen2'
+        id: Screen2
+
+    ScreenCDF:
+        name: 'ScreenCDF'
+        id: ScreenCDF
+
+    Screen_Listar:
+        name: 'Screen_Listar'
+        id: Screen_L
+
+<Screen1>:
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: '60dp'
+        padding: '60dp'
+        canvas:
+            Rectangle:
+                source: 'bg.jpg'
+                size: self.size
+        Label:
+            text: 'CADASTRO DE FILMES'
+            font_size: '65sp'
+            font_name: 'Roboto-BoldItalic'
+            underline: True
+        Button:
+            text: 'CADASTRAR'
+            font_size: '50sp'
+            on_release: root.manager.current = 'Screen2'
+        Button:
+            text: 'SAIR'
+            font_size: '45sp'
+            on_release: root.confirmacao()
+
+<Screen2>:
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: '40dp'
+        padding: '40dp'
+        canvas:
+            Rectangle:
+                source: 'bg.jpg'
+                size: self.size
+        ActionBar:
+            size_hint: 0.2, 0.6
+            ActionView:
+                ActionPrevious:
+                    title: 'VOLTAR'
+                    with_previous: True
+                    app_icon: 'camera.png'
+                    height: '3dp'
+                    on_release: root.manager.current = 'Screen1'
+
+        Label:
+            text: 'CADASTRO DE FILMES'
+            font_size: '65sp'
+            font_name: 'Roboto-BoldItalic'
+            underline: True
+        Button:
+            text: 'CADASTRAR FILMES'
+            font_size: '40sp'
+            on_release: root.manager.current = 'ScreenCDF'
+        Button:
+            text: 'LISTAR FILMES'
+            font_size: '40sp'
+            on_release: root.manager.current = 'Screen_Listar'
+        Button:
+            text: 'DELETAR FILMES'
+            font_size: '40sp'
+
+<ScreenCDF>:
+    BoxLayout:
+        orientation: 'vertical'
+        id: CDF
+        cols: 1
+        spacing: 20
+        padding: [200, 10]
+        canvas:
+            Rectangle:
+                source: 'bg.jpg'
+                size: self.size
+        ActionBar:
+            ActionView:
+                ActionPrevious:
+                    title: 'VOLTAR'
+                    with_previous: True
+                    app_icon: 'camera.png'
+                    height: '3dp'
+                    on_release: root.manager.current = 'Screen2'
+
+        FloatLayout
+            size: root.width, root.height/2
+
+            Label:
+                pos_hint: {"x":-0.1, "top":1}
+                size_hint: 0.5, 0.12
+                text: 'Nome do Filme: '
+                font_size: (root.width**2 + root.height**2) / 14**4
+            TextInput:
+                pos_hint: {"x":0.5, "top":1}
+                size_hint: 0.8, 0.10
+                id: ti_nome
+                multiline: False
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            Label:
+                pos_hint: {"x":-0.1, "top":0.83}
+                size_hint: 0.5,0.12
+                text: 'Nome do Diretor: '
+                font_size: (root.width**2 + root.height**2) / 14**4
+            TextInput:
+                pos_hint: {"x":0.5, "top":0.83}
+                size_hint: 0.8, 0.10
+                id: ti_diretor
+                multiline: False
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            Label:
+                pos_hint: {"x":-0.1, "top":0.65}
+                size_hint: 0.5,0.12
+                text: 'Data de Lancamento: '
+                font_size: (root.width**2 + root.height**2) / 14**4
+            TextInput:
+                pos_hint: {"x":0.5, "top":0.65}
+                size_hint: 0.8, 0.10
+                id: ti_lancamento
+                multiline: False
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            Label:
+                pos_hint: {"x":-0.1, "top":0.47}
+                size_hint: 0.5, 0.12
+                text: 'Valor Arrecadado: '
+                font_size: (root.width**2 + root.height**2) / 14**4
+            TextInput:
+                pos_hint: {"x":0.5, "top":0.47}
+                size_hint: 0.8, 0.10
+                id: ti_valor
+                multiline: False
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            Label:
+                pos_hint: {"x":-0.1, "top":0.30}
+                size_hint: 0.5, 0.12
+                text: 'Nota do Publico: '
+                font_size: (root.width**2 + root.height**2) / 14**4
+            TextInput:
+                pos_hint: {"x":0.5, "top":0.30}
+                size_hint: 0.8, 0.10
+                id: ti_nota
+                multiline: False
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            Spinner:
+                id: spinner_id
+                pos_hint: {"x":-0.2, "top":0.15}
+                size_hint: 0.7, 0.13
+                text: 'Selecione um Genero'
+                values: 'Comedia', 'Terror', 'Acao', 'Romance', 'Musical', 'Drama', 'Outro'
+                font_size: (root.width**2 + root.height**2) / 14**4
+                on_text: root.spinner_clicked(spinner_id.text)
+
+            Button:
+                pos_hint: {"x":0.8, "top":0.15}
+                size_hint: 0.5, 0.13
+                text: 'SALVAR'
+                font_size: (root.width**2 + root.height**2) / 14**4
+                on_release: root.insert_data()
+                on_release: root.manager.current= 'Screen2'
+
+<Screen_Listar>:
+    BoxLayout:
+        orientation: 'vertical'
+        cols: 1
+        spacing: 20
+        padding: [200, 10]
+        canvas:
+            Rectangle:
+                source: 'bg.jpg'
+                size: self.size
+        ActionBar:
+            ActionView:
+                ActionPrevious:
+                    title: 'VOLTAR'
+                    with_previous: True
+                    app_icon: 'camera.png'
+                    height: '3dp'
+                    on_release: root.manager.current = 'Screen2'
+        Button:
+            pos_hint: {"x":0.4, "top":1}
+            size_hint: 0.5, 0.13
+            text: 'Atualizar dados'
+            on_release: root.att_data()
+
+        RecycleView:
+            data: [{'text':"Id:{} Nome:{} Diretor:{} Lancamento:{} Valor:{} Nota:{} Genero:{}".format(id,Nome,Diretor,Lancamento,Valor,Nota,Genero)} for id,Nome,Diretor,Lancamento,Valor,Nota,Genero in root.rows]
+            viewclass: 'Label'
+            RecycleBoxLayout:
+                default_size: None, dp(80)
+                default_size_hint: 1, None
+                pos_hint: {"x":0.4, "top":0.7}
+                height: '65sp'
+                orientation: 'vertical'
+
