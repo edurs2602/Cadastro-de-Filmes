@@ -5,6 +5,7 @@ import sqlite3
 from kivy.app import App
 from kivy.uix.label import Label
 from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.gridlayout import GridLayout
 from kivy.uix.screenmanager import Screen, ScreenManager
 from kivy.uix.spinner import Spinner
 from kivy.config import Config
@@ -35,7 +36,6 @@ class Screenmanager(ScreenManager):         #Tela que comanda todas as outras
 class Screen1(Screen):
 
     def confirmacao(self, *args):           #Criar um pop-up para perguntar se o usuario desejar sair
-
         box = BoxLayout(orientation='vertical', padding=10, spacing=10)
         botoes = BoxLayout(padding=10, spacing=10)
 
@@ -43,7 +43,7 @@ class Screen1(Screen):
                     size=(240, 160))
 
         sim = Button(text='Sim', on_release=app.get_running_app().stop)
-        nao = Button(text= 'Não', on_release=pop.dismiss)
+        nao = Button(text='Não', on_release=pop.dismiss)
 
         botoes.add_widget(sim)
         botoes.add_widget(nao)
@@ -80,18 +80,29 @@ class ScreenCDF(Screen):
         cursor.execute(f'''INSERT INTO dados VALUES(NULL, '{Nome}', '{Diretor}', '{Lancamento}', '{Valor}', '{Nota}', '{Genero}')''')
         connection.commit()
 
-    def clear_TI(self):
-        self.ids.ti_nome.text = ''
-        self.ids.ti_diretor.text = ''
-        self.ids.ti_lancamento.text = ''
-        self.ids.ti_valor.text = ''
-        self.ids.ti_nota.text = ''
-        self.ids.spinner_id.text = 'Selecione um Genero'
+    def salvo(self, *args):
+        box = BoxLayout(orientation='vertical', padding=10, spacing=10)
+        botoes = BoxLayout(padding=10, spacing=10)
 
+        pop = Popup(title='Cadastrado com sucesso!', content=box, size_hint=(None, None),
+                    size=(240, 160))
+
+        ok = Button(text='OK', on_release=pop.dismiss)
+
+        botoes.add_widget(ok)
+
+        atencao = Image(source='ok.png')
+
+        box.add_widget(atencao)
+        box.add_widget(botoes)
+
+        anim = Animation(size=(300, 220), duration=0.2, t='out_circ')
+        anim.start(pop)
+
+        pop.open()
 
 class Screen_Listar(Screen):
     rows = ListProperty([('id','Nome','Diretor','Lancamento','Valor','Nota','Genero')])
-
 
     def att_data(self):
         self.connection = sqlite3.connect('teste.db')
