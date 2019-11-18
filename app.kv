@@ -79,7 +79,7 @@
         orientation: 'vertical'
         id: CDF
         cols: 1
-        spacing: 20
+        spacing: 10
         padding: [200, 10]
         canvas:
             Rectangle:
@@ -107,6 +107,7 @@
                 size_hint: 0.8, 0.10
                 id: ti_nome
                 multiline: False
+                hint_text: 'Nome do Filme'
                 font_size: (root.width**2 + root.height**2) / 14**4
 
             Label:
@@ -119,6 +120,7 @@
                 size_hint: 0.8, 0.10
                 id: ti_diretor
                 multiline: False
+                hint_text: 'Nome do Diretor'
                 font_size: (root.width**2 + root.height**2) / 14**4
 
             Label:
@@ -131,6 +133,7 @@
                 size_hint: 0.8, 0.10
                 id: ti_lancamento
                 multiline: False
+                hint_text: 'Data de Lançamento'
                 font_size: (root.width**2 + root.height**2) / 14**4
 
             Label:
@@ -143,6 +146,7 @@
                 size_hint: 0.8, 0.10
                 id: ti_valor
                 multiline: False
+                hint_text: 'Valor Arrecadado'
                 font_size: (root.width**2 + root.height**2) / 14**4
 
             Label:
@@ -155,6 +159,7 @@
                 size_hint: 0.8, 0.10
                 id: ti_nota
                 multiline: False
+                hint_text: 'Nota do público'
                 font_size: (root.width**2 + root.height**2) / 14**4
 
             Spinner:
@@ -166,7 +171,9 @@
                 font_size: (root.width**2 + root.height**2) / 14**4
                 on_text: root.spinner_clicked(spinner_id.text)
 
+
             Button:
+                id: SaveB
                 pos_hint: {"x":0.8, "top":0.15}
                 size_hint: 0.5, 0.13
                 text: 'SALVAR'
@@ -177,8 +184,9 @@
 <Screen_Listar>:
     BoxLayout:
         orientation: 'vertical'
+        id: CDF
         cols: 1
-        spacing: 20
+        spacing: 10
         padding: [200, 10]
         canvas:
             Rectangle:
@@ -192,19 +200,36 @@
                     app_icon: 'camera.png'
                     height: '3dp'
                     on_release: root.manager.current = 'Screen2'
-        Button:
-            pos_hint: {"x":0.4, "top":1}
-            size_hint: 0.5, 0.13
-            text: 'Atualizar dados'
-            on_release: root.att_data()
 
-        RecycleView:
-            data: [{'text':"Id:{} Nome:{} Diretor:{} Lancamento:{} Valor:{} Nota:{} Genero:{}".format(id,Nome,Diretor,Lancamento,Valor,Nota,Genero)} for id,Nome,Diretor,Lancamento,Valor,Nota,Genero in root.rows]
-            viewclass: 'Label'
-            RecycleBoxLayout:
-                default_size: None, dp(80)
-                default_size_hint: 1, None
-                pos_hint: {"x":0.4, "top":0.7}
-                height: '65sp'
-                orientation: 'vertical'
+        FloatLayout:
+            size: root.width, root.height/2
 
+            Button:
+                pos_hint: {"x":0.3, "top":1}
+                size_hint: 0.5, 0.13
+                text: 'Atualizar dados'
+                on_release: root.listData()
+            ScrollView:
+                pos_hint: {"x":0.019, "top":0.75}
+                Label:
+                    size_hint: 1, 0.70
+                    font_size: (root.width**2 + root.height**2) / 14**4
+                    text: str(root.listData())
+                    color: 0,0,0,1
+                    canvas.before:
+                        Color:
+                            rgba: 1,1,1,1
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+
+
+            #RecycleView:
+            #   data: [{'text':"Id:{} Nome:{} Diretor:{} Lancamento:{} Valor:{} Nota:{} Genero:{}".format(id,Nome,Diretor,Lancamento,Valor,Nota,Genero)} for id,Nome,Diretor,Lancamento,Valor,Nota,Genero in root.rows]
+            #    viewclass: 'Label'
+            #    RecycleBoxLayout:
+            #        default_size: None, dp(80)
+            #        default_size_hint: 1, None
+            #        pos_hint: {"x":0.4, "top":0.7}
+            #        height: '65sp'
+            #        orientation: 'vertical'

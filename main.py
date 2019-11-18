@@ -22,7 +22,6 @@ from kivy.core.window import Window
 Config.set('kivy', 'exit_on_escape', 0)
 Config.set(u'''graphics''', u''''resizable''', True)
 Config.write()
-Window.size = (800, 600)
 
 connection = sqlite3.connect('teste.db')
 cursor = connection.cursor()
@@ -87,7 +86,7 @@ class ScreenCDF(Screen):
         pop = Popup(title='Cadastrado com sucesso!', content=box, size_hint=(None, None),
                     size=(240, 160))
 
-        ok = Button(text='OK', on_release=pop.dismiss)
+        ok = Button(text='OK', on_press=pop.dismiss, on_release=self.changer)
 
         botoes.add_widget(ok)
 
@@ -101,23 +100,41 @@ class ScreenCDF(Screen):
 
         pop.open()
 
+    def changer(self, *args):
+        self.manager.current = 'Screen2'
+
+    def clear_txt(self):
+        for txt in (self.ids.ti_nome.text, self.ids.ti_diretor.text, self.ids.ti_lancamento.text, self.ids.ti_valor.text, self.ids.ti_nota.text):
+            txt = ''
+
 class Screen_Listar(Screen):
-    rows = ListProperty([('id','Nome','Diretor','Lancamento','Valor','Nota','Genero')])
+    #rows = ListProperty([('id', 'Nome', 'Diretor', 'Lancamento', 'Valor', 'Nota', 'Genero')])
 
     def att_data(self):
-        self.connection = sqlite3.connect('teste.db')
-        self.cursor = connection.cursor()
+        for row in cursor.execute('''SELECT * FROM dados'''):
+            print("ID: ", row[0])
+            print("NOME: ", row[1])
+            print("DIRETOR: ", row[2])
+            print("LANCAMENTO: ", row[3])
+            print("VALOR: ", row[4])
+            print("NOTA: ", row[5])
+            print("GENERO: ", row[6])
+            print('=-=' *32)
 
-        cursor.execute('''SELECT * FROM dados''')
-        for i in cursor:
-            r1 = 'ID: '+str(100000000+i[0])[1:9]+'\n'
-            r2 = 'Nome: ' + str(i[1]) + '\n'
-            r3 = 'Diretor: ' + str(i[2]) + '\n'
-            r4 = 'Lancamento: ' + str(i[3]) + '\n'
-            r5 = 'Valor: ' + str(i[4]) + '\n'
-            r6 = 'Nota: ' + str(i[5]) + '\n'
-            r7 = 'Genero: ' + str(i[6]) + '\n'
-            listar = r1 + r2 + r3 + r4 + r5 + r6 + r7
+    def listData(self):
+        rows = []
+        for row in cursor.execute('''SELECT * FROM dados'''):
+            r1 = 'ID: ' + str(row[0]) + '\n'
+            r2 = 'Nome do Filme: ' + str(row[1]) + '\n'
+            r3 = 'Diretor: ' + str(row[2]) + '\n'
+            r4 = 'Lançamento: ' + str(row[3]) + '\n'
+            r5 = 'Valor: ' + str(row[4]) + 'R$' + '\n'
+            r6 = 'Nota: ' + str(row[5]) + '\n'
+            r7 = 'Genero: ' + str(row[6]) + '\n'
+            Mrow = r1 + r2 + r3 + r4 + r5 + r6 + r7
+            rows.append(Mrow)
+            return Mrow
+
 
 class app(App):
     title = "Cadastro de Filmes"
