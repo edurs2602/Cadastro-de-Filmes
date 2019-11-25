@@ -151,7 +151,6 @@ class RV(RecycleView ,Screen):
         super(RV, self).__init__(**kwargs)
         self.data_transfer()
 
-
     def data_transfer(self):
         connection = sqlite3.connect('teste.db')
         cursor = connection.cursor()
