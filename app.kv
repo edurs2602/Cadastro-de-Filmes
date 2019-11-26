@@ -130,7 +130,7 @@
                 size_hint: 0.8, 0.10
                 id: ti_lancamento
                 multiline: False
-                hint_text: 'Data de Lançamento'
+                hint_text: 'Data de Lancamento'
                 font_size: (root.width**2 + root.height**2) / 14**4
 
             Label:
@@ -156,7 +156,7 @@
                 size_hint: 0.8, 0.10
                 id: ti_nota
                 multiline: False
-                hint_text: 'Nota do público'
+                hint_text: 'Nota do publico'
                 font_size: (root.width**2 + root.height**2) / 14**4
 
             Spinner:
@@ -164,7 +164,7 @@
                 pos_hint: {"x":-0.2, "top":0.15}
                 size_hint: 0.7, 0.13
                 text: 'Selecione um Genero'
-                values: 'Comedia', 'Terror', 'Acao', 'Romance', 'Musical', 'Drama', 'Outro', 'Animação'
+                values: 'Comedia', 'Terror', 'Acao', 'Romance', 'Musical', 'Drama', 'Outro', 'Animacao'
                 font_size: (root.width**2 + root.height**2) / 14**4
                 on_text: root.spinner_clicked(spinner_id.text)
 
@@ -183,7 +183,6 @@
     size_hint: None, None
     size: 400, 400
     auto_dismiss: False
-
     BoxLayout:
         orientation: "vertical"
         TextInput:
@@ -195,9 +194,6 @@
             on_release:
                 root.obj.update_changes(txtinput.text)
                 root.dismiss()
-        Button:
-            size_hint: 1, 0.2
-            text: "Deletar Coluna"
         Button:
             size_hint: 1, 0.2
             text: "Cancelar"

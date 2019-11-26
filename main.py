@@ -32,7 +32,7 @@ Config.set('kivy', 'exit_on_escape', 0)
 Config.set(u'''graphics''', u''''resizable''', True)
 Config.write()
 
-connection = sqlite3.connect('teste.db')
+connection = sqlite3.connect('cdf.db')
 cursor = connection.cursor()
 cursor.execute('''CREATE TABLE IF NOT EXISTS dados 
     (id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -75,7 +75,7 @@ class ScreenCDF(Screen):
         print('O Genero Selecionado Foi: ' + value)
 
     def insert_data(self):
-        self.connection = sqlite3.connect('teste.db')
+        self.connection = sqlite3.connect('cdf.db')
         self.cursor = connection.cursor()
 
         Nome = str(self.ids.ti_nome.text)
@@ -165,7 +165,7 @@ class RV(RecycleView, Screen):
         self.data_transfer()
 
     def data_transfer(self):
-        connection = sqlite3.connect('teste.db')
+        connection = sqlite3.connect('cdf.db')
         cursor = connection.cursor()
 
         cursor.execute('''SELECT * FROM dados ORDER BY id ASC''')
@@ -175,9 +175,9 @@ class RV(RecycleView, Screen):
             for col in rows:
                 self.data_list.append(col)
 
-
 class app(App):
     title = "Cadastro de Filmes"
+
     def build(self):
         return Screenmanager()
 
