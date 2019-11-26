@@ -48,7 +48,7 @@
                 source: 'bg.jpg'
                 size: self.size
         ActionBar:
-            size_hint: 0.2, 0.6
+            size_hint: 0.4, 0.4
             ActionView:
                 ActionPrevious:
                     title: 'VOLTAR'
@@ -70,9 +70,6 @@
             text: 'LISTAR FILMES'
             font_size: '40sp'
             on_release: root.manager.current = 'Screen_Listar'
-        Button:
-            text: 'DELETAR FILMES'
-            font_size: '40sp'
 
 <ScreenCDF>:
     BoxLayout:
@@ -181,48 +178,42 @@
                 on_release: root.insert_data()
                 on_release: root.salvo()
 
-<Screen_Listar>:
+<TextInputPopup>:
+    title: "Alterar dados"
+    size_hint: None, None
+    size: 400, 400
+    auto_dismiss: False
+
     BoxLayout:
-        orientation: 'vertical'
-        id: CDF
-        cols: 1
-        spacing: 10
-        padding: [200, 10]
-        canvas:
-            Rectangle:
-                source: 'bg.jpg'
-                size: self.size
-        ActionBar:
-            ActionView:
-                ActionPrevious:
-                    title: 'VOLTAR'
-                    with_previous: True
-                    app_icon: 'camera.png'
-                    height: '3dp'
-                    on_release: root.manager.current = 'Screen2'
+        orientation: "vertical"
+        TextInput:
+            id: txtinput
+            text: root.obj_text
+        Button:
+            size_hint: 1, 0.2
+            text: "Salvar Mudancas"
+            on_release:
+                root.obj.update_changes(txtinput.text)
+                root.dismiss()
+        Button:
+            size_hint: 1, 0.2
+            text: "Deletar Coluna"
+        Button:
+            size_hint: 1, 0.2
+            text: "Cancelar"
+            on_release: root.dismiss()
 
-        ScrollView:
-            pos_hint: {"x":0.019, "top":0.75}
-            FloatLayout:
-                size: root.width, root.height/2
-                Button:
-                    pos_hint: {"x":0.3, "top":1}
-                    size_hint: 0.5, 0.13
-                    text: 'Atualizar dados'
-                    on_release: root.listData()
-                    on_release: root.data_transfer()
-
-<SelectableLabel>:
+<SelectableButton>:
     # Draw a background to indicate selection
-    size_hint: 0.5, 0.13
+    size_hint: 0.7, 0.15
     canvas.before:
         Color:
             rgba: (.0, 0.9, .1, .3) if self.selected else (0, 0, 0, 1)
         Rectangle:
             pos: self.pos
             size: self.size
+
 <RV>:
-    on_pre_enter: root.on_pre_enter
     BoxLayout:
         canvas:
             Rectangle:
@@ -243,21 +234,39 @@
             size_hint: 1, None
             size_hint_y: None
             height: 25
-            cols: 2
+            cols: 1
+            BoxLayout:
+                orientation: 'horizontal'
+                spacing: 2
+                Label:
+                    text: ""
+                Label:
+                    text: "Nome do Filme"
+                Label:
+                    text: "Diretor"
+                Label:
+                    text: "Lancamento"
+                Label:
+                    text: "Valor Arrecadado"
+                Label:
+                    text: "Nota"
+                Label:
+                    text: "Genero"
 
         BoxLayout:
             RecycleView:
                 viewclass: 'SelectableButton'
                 data: [{'text': str(x)} for x in root.data_list]
                 scroll_type: ['bars', 'content']
-                scroll_wheel_distance: dp(114)
-                bar_width: dp(10)
+                scroll_wheel_distance: dp(400)
+                bar_width: dp(30)
                 SelectableRecycleGridLayout:
                     cols: 7
-                    default_size: None, dp(26)
+                    default_size: None, dp(40)
                     default_size_hint: 1, None
                     size_hint_y: None
                     height: self.minimum_height
                     orientation: 'vertical'
                     multiselect: True
                     touch_multiselect: True
+                    spacing: dp(2)

@@ -112,8 +112,14 @@ class ScreenCDF(Screen):
     def changer(self, *args):
         self.manager.current = 'Screen2'
 
-class Screen_Listar(Screen):
-    pass
+class TextInputPopup(Popup):
+    obj = ObjectProperty(None)
+    obj_text = StringProperty("")
+
+    def __init__(self, obj, **kwargs):
+        super(TextInputPopup, self).__init__(**kwargs)
+        self.obj = obj
+        self.obj_text = obj.text
 
 class SelectableRecycleGridLayout(FocusBehavior, LayoutSelectionBehavior, RecycleGridLayout):
     ''' Adds selection and focus behaviour to the view. '''
@@ -144,7 +150,14 @@ class SelectableButton(RecycleDataViewBehavior, Button):
         else:
             print("selection removed for {0}".format(rv.data[index]))
 
-class RV(RecycleView ,Screen):
+    def on_press(self):
+        popup = TextInputPopup(self)
+        popup.open()
+
+    def update_changes(self, txt):
+        self.text = txt
+
+class RV(RecycleView, Screen):
     data_list = ListProperty([])
 
     def __init__(self, **kwargs):
@@ -155,12 +168,13 @@ class RV(RecycleView ,Screen):
         connection = sqlite3.connect('teste.db')
         cursor = connection.cursor()
 
-        cursor.execute('''SELECT * FROM dados ORDER BY Nome ASC''')
+        cursor.execute('''SELECT * FROM dados ORDER BY id ASC''')
         row = cursor.fetchall()
 
         for rows in row:
             for col in rows:
                 self.data_list.append(col)
+
 
 class app(App):
     title = "Cadastro de Filmes"
