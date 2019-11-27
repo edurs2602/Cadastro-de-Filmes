@@ -1,5 +1,4 @@
 # Cadastro de Filmes
-<<<<<<< HEAD
 ### Trabalho do 4º bimestre de Programação Estruturada e Orientada a Objetos, consiste em criar um software em python com kivy, para cadastrar filmes
 
 ![Python+Kivy](https://user-images.githubusercontent.com/54729517/69451320-d8d18f80-0d3d-11ea-8d82-56b24a99976a.png)
@@ -8,7 +7,6 @@
 # Kivy
 
 Innovative user interfaces made easy.
-=======
 ## Trabalho do 4º bimestre de Programação estruturada e orientada a objetos, consiste em criar um software em python com kivy, para cadastrar filmes
 
 ![Python+Kivy](https://user-images.githubusercontent.com/54729517/69570719-24cf3f00-0f9f-11ea-85ff-6ea6f5c4bb14.png)
@@ -16,7 +14,6 @@ Innovative user interfaces made easy.
 ## Kivy
 
 ### Innovative user interfaces made easy.
->>>>>>> 1fc8e0193dfce0532f39d57fc3e73ec01d0301c0
 
 Kivy is an open source, cross-platform Python framework for the development of applications that make use of innovative, multi-touch user interfaces. The aim is to allow for quick and easy interaction design and rapid prototyping whilst making your code reusable and deployable.
 
@@ -26,18 +23,14 @@ Kivy is MIT licensed, actively developed by a great community and is supported b
 
 Coverage Status Build Status Build status Bountysource Backers on Open Collective Sponsors on Open Collective
 
-<<<<<<< HEAD
 ![kivy](https://user-images.githubusercontent.com/54729517/69471245-f7567b80-0d7b-11ea-804d-29475047f1b1.png)
 
 ### Installation, Documentation and Examples
 Extensive installation instructions as well as tutorials and general documentation, including an API reference, can be found at https://kivy.org/docs. A PDF version is also available.
 
 Kivy ships with many examples which can be found in the examples folder.
-=======
 ![kivy](https://user-images.githubusercontent.com/54729517/69570729-2b5db680-0f9f-11ea-8a99-8eebb4dc145a.png)
 
 ### Installation, Documentation and Examples
 
 Extensive installation instructions as well as tutorials and general documentation, including an API reference, can be found at https://kivy.org/docs. A PDF version is also available.
-
->>>>>>> 1fc8e0193dfce0532f39d57fc3e73ec01d0301c0
