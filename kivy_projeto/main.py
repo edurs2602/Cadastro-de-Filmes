@@ -23,8 +23,9 @@ connection = sqlite3.connect('cdf.db')          #Cria o banco de dados
 cursor = connection.cursor()
 cursor.execute('''CREATE TABLE IF NOT EXISTS dados          
     (id INTEGER PRIMARY KEY AUTOINCREMENT,
-    Nome TEXT, Diretor TEXT, Lancamento TEXT, Valor TEXT, Nota INT, Genero TEXT);''')           #Cria a tabela no banco de dados
-
+    Nome TEXT, Diretor TEXT, Lancamento TEXT, Valor TEXT, Nota INT, Genero TEXT);''')           #Cria a tabela no banco de dados chamada: dados
+                                                                                                #Tem os valores de: (
+                                                                                                #Nome, Diretor, Lançamento, Valor, Nota, Genero)
 class Screenmanager(ScreenManager):         #Tela que comanda todas as outras
     pass
 
@@ -52,7 +53,6 @@ class Screen1(Screen):
         anim.start(pop)
 
         pop.open()
-
 
 class Screen2(Screen):          #Tela responsavel para saber se o usuario deseja Cadastrar ou Listar
     pass
@@ -111,7 +111,8 @@ class TextInputPopup(Popup):            #Popup para mudar os valores dos filmes 
         self.obj_text = obj.text
 
 class SelectableRecycleGridLayout(FocusBehavior, LayoutSelectionBehavior, RecycleGridLayout):           #Cria um Gridlayour para o RV
-    ''' Adds selection and focus behaviour to the view. '''
+    # Adiciona um focus behaviour to the view
+    pass
 
 class SelectableButton(RecycleDataViewBehavior, Button):            #Botões onde serão escrito os dados
     index = None
@@ -119,19 +120,16 @@ class SelectableButton(RecycleDataViewBehavior, Button):            #Botões ond
     selectable = BooleanProperty(True)
 
     def refresh_view_attrs(self, rv, index, data):          #Atualiza as mudanças do insert_data
-        ''' Catch and handle the view changes '''
         self.index = index
         return super(SelectableButton, self).refresh_view_attrs(rv, index, data)
 
     def on_touch_down(self, touch):         #Faz uma ação ao ser pressionado
-        ''' Add selection on touch down '''
         if super(SelectableButton, self).on_touch_down(touch):
             return True
         if self.collide_point(*touch.pos) and self.selectable:
             return self.parent.select_with_touch(self.index, touch)
 
     def apply_selection(self, rv, index, is_selected):          #Insere as mudanças
-        ''' Respond to the selection of items in the view. '''
         self.selected = is_selected
         if is_selected:
             print("selection changed to {0}".format(rv.data[index]))
