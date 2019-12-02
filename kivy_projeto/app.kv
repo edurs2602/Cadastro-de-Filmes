@@ -1,111 +1,111 @@
-<Screenmanager>:
-    Screen1:
+<Screenmanager>:            # Tela que comanda todas as outras
+    Screen1:            # Tela 1
         name: 'Screen1'
         id: Screen1
 
-    Screen2:
+    Screen2:            # Tela 2
         name: 'Screen2'
         id: Screen2
 
-    ScreenCDF:
+    ScreenCDF:          # Tela 'Cadastrar Filmes'
         name: 'ScreenCDF'
         id: ScreenCDF
 
-    RV:
+    RV:                 # Tela 'Listar Filmes'
         name: 'Screen_Listar'
         id: Screen_L
 
-<Screen1>:
-    BoxLayout:
-        orientation: 'vertical'
+<Screen1>:                  # Tela 1
+    BoxLayout:              # Configurações da tela 1 
+        orientation: 'vertical'             # Orientação
         spacing: '60dp'
         padding: '60dp'
         canvas:
             Rectangle:
-                source: 'bg.jpg'
+                source: 'bg.jpg'            # Background
                 size: self.size
         Label:
-            text: 'CADASTRO DE FILMES'
-            font_size: '65sp'
-            font_name: 'Roboto-BoldItalic'
-            underline: True
+            text: 'CADASTRO DE FILMES'              # Texto
+            font_size: '65sp'                       # Tamanho da fonte
+            font_name: 'Roboto-BoldItalic'          # Fonte
+            underline: True                         # Sublinhado: Sim
+        Button:                         # Widget: Botão
+            text: 'CADASTRAR'           # Texto
+            font_size: '50sp'           # Tamanho do texto
+            on_release: root.manager.current = 'Screen2'            # Muda de tela para Screen 2
         Button:
-            text: 'CADASTRAR'
-            font_size: '50sp'
-            on_release: root.manager.current = 'Screen2'
-        Button:
-            text: 'SAIR'
-            font_size: '45sp'
-            on_release: root.confirmacao()
+            text: 'SAIR'                # Texto
+            font_size: '45sp'           # Tamanho do texto
+            on_release: root.confirmacao()                          # Abre o PopUp 'Confirmação'
 
 <Screen2>:
-    BoxLayout:
-        orientation: 'vertical'
+    BoxLayout:              # Configurações da tela 2
+        orientation: 'vertical'             # Orientação
         spacing: '40dp'
         padding: '40dp'
         canvas:
             Rectangle:
-                source: 'bg.jpg'
+                source: 'bg.jpg'            # Background
                 size: self.size
-        ActionBar:
-            size_hint: 0.4, 0.4
+        ActionBar:                          # Barra superior para realizar ações
+            size_hint: 0.4, 0.4             
             ActionView:
                 ActionPrevious:
-                    title: 'VOLTAR'
+                    title: 'VOLTAR'             # Seu Texto
                     with_previous: True
-                    app_icon: 'camera.png'
-                    height: '3dp'
-                    on_release: root.manager.current = 'Screen1'
+                    app_icon: 'camera.png'      # Seu Icone
+                    height: '3dp'               # Seu Tamanho
+                    on_release: root.manager.current = 'Screen1'        # Se Pressionar retorna para a tela 1
 
         Label:
-            text: 'CADASTRO DE FILMES'
-            font_size: '65sp'
-            font_name: 'Roboto-BoldItalic'
-            underline: True
-        Button:
-            text: 'CADASTRAR FILMES'
-            font_size: '40sp'
-            on_release: root.manager.current = 'ScreenCDF'
-        Button:
-            text: 'LISTAR FILMES'
-            font_size: '40sp'
-            on_release: root.manager.current = 'Screen_Listar'
+            text: 'CADASTRO DE FILMES'              # Texto
+            font_size: '65sp'                       # Tamanho da fonte
+            font_name: 'Roboto-BoldItalic'          # Fonte
+            underline: True                         # Sublinhado: Sim
+        Button:                                 # Widget: Botão
+            text: 'CADASTRAR FILMES'            # Texto
+            font_size: '40sp'                   # Tamanho do texto
+            on_release: root.manager.current = 'ScreenCDF'          # Muda de tela para Screen de Cadastro 
+        Button:                                 # Widget: Botão
+            text: 'LISTAR FILMES'               # Texto
+            font_size: '40sp'                   # Tamanho do texto
+            on_release: root.manager.current = 'Screen_Listar'      # Muda de tela para Screen de Listagem
 
 <ScreenCDF>:
-    BoxLayout:
-        orientation: 'vertical'
-        id: CDF
-        cols: 1
+    BoxLayout:              # Configurações da tela 1 
+        orientation: 'vertical'             # Orientação
+        id: CDF                             # Sua ID
+        cols: 1                             # Colunas
         spacing: 10
         padding: [200, 10]
         canvas:
             Rectangle:
-                source: 'bg.jpg'
+                source: 'bg.jpg'            # Background
                 size: self.size
-        ActionBar:
+        ActionBar:                          # Barra superior para realizar ações
             ActionView:
                 ActionPrevious:
                     title: 'VOLTAR'
-                    with_previous: True
-                    app_icon: 'camera.png'
-                    height: '3dp'
-                    on_release: root.manager.current = 'Screen2'
+                    with_previous: True         # Seu Texto
+                    app_icon: 'camera.png'      # Seu Icone
+                    height: '3dp'               # Seu Tamanho
+                    on_release: root.manager.current = 'Screen2'            # Muda de tela para Screen 2
 
-        FloatLayout
-            size: root.width, root.height/2
+        FloatLayout:                         # Cria um FloatLayout dentro do BoxLayout
+            size: root.width, root.height/2             # Seu tamanho
 
-            Label:
-                pos_hint: {"x":-0.1, "top":1}
-                size_hint: 0.5, 0.12
-                text: 'Nome do Filme: '
-                font_size: (root.width**2 + root.height**2) / 14**4
-            TextInput:
-                pos_hint: {"x":0.5, "top":1}
-                size_hint: 0.8, 0.10
-                id: ti_nome
-                multiline: False
-                hint_text: 'Nome do Filme'
-                font_size: (root.width**2 + root.height**2) / 14**4
+            Label:                          # Cria um box para texto
+                pos_hint: {"x":-0.1, "top":1}                               # Sua localização
+                size_hint: 0.5, 0.12                                        # Seu tamanho
+                text: 'Nome do Filme: '                                     # Seu texto
+                font_size: (root.width**2 + root.height**2) / 14**4         # Tamanho da Fonte
+            TextInput:                      # Cria um box para escrever
+                pos_hint: {"x":0.5, "top":1}                                # Sua localização
+                size_hint: 0.8, 0.10                                        # Seu tamanho
+                id: ti_nome                                                 # Sua ID
+                multiline: False                                            # Se tem multiplas linhas: Falso
+                hint_text: 'Nome do Filme'                                  # Seu Texto
+                font_size: (root.width**2 + root.height**2) / 14**4         # Tamanho da Fonte
 
             Label:
                 pos_hint: {"x":-0.1, "top":0.83}
@@ -159,110 +159,109 @@
                 hint_text: 'Nota do publico'
                 font_size: (root.width**2 + root.height**2) / 14**4
 
-            Spinner:
-                id: spinner_id
-                pos_hint: {"x":-0.2, "top":0.15}
-                size_hint: 0.7, 0.13
-                text: 'Selecione um Genero'
-                values: 'Comedia', 'Terror', 'Acao', 'Romance', 'Musical', 'Drama', 'Outro', 'Animacao'
-                font_size: (root.width**2 + root.height**2) / 14**4
-                on_text: root.spinner_clicked(spinner_id.text)
+            Spinner:                        # Widget: Spinner
+                id: spinner_id              # Sua ID
+                pos_hint: {"x":-0.2, "top":0.15}                        # Sua localização
+                size_hint: 0.7, 0.13                                    # Seu tamanho
+                text: 'Selecione um Genero'                             # Seu texto
+                values: 'Comedia', 'Terror', 'Acao', 'Romance', 'Musical', 'Drama', 'Animacao', 'Outro'         # Generos
+                font_size: (root.width**2 + root.height**2) / 14**4     # Tamanho da fonte    
+                on_text: root.spinner_clicked(spinner_id.text)          # Mostra no terminal o genero selecionado
 
 
-            Button:
-                id: SaveB
-                pos_hint: {"x":0.8, "top":0.15}
-                size_hint: 0.5, 0.13
-                text: 'SALVAR'
-                font_size: (root.width**2 + root.height**2) / 14**4
-                on_release: root.insert_data()
-                on_release: root.salvo()
+            Button:                         # Widget: Botão
+                id: SaveB                   # Sua ID
+                pos_hint: {"x":0.8, "top":0.15}                         # Sua posição
+                size_hint: 0.5, 0.13                                    # Seu Tamanho
+                text: 'SALVAR'                                          # Seu texto
+                font_size: (root.width**2 + root.height**2) / 14**4     # Tamanho do texto
+                on_release: root.insert_data()                          # Quando pressionado executa a função 'insert_data'
+                on_release: root.salvo()                                # Quando pressionado executa a função 'salvo'
 
-<TextInputPopup>:
-    title: "Alterar dados"
-    size_hint: None, None
-    size: 400, 400
-    auto_dismiss: False
-    BoxLayout:
-        orientation: "vertical"
-        TextInput:
-            id: txtinput
-            text: root.obj_text
-        Button:
-            size_hint: 1, 0.2
-            text: "Salvar Mudancas"
+<TextInputPopup>:           # Configurações do PopUp
+    title: "Alterar dados"          # Seu titulo
+    size_hint: None, None           
+    size: 400, 400                  # Seu tamanho
+    auto_dismiss: False             
+    BoxLayout:              # Configurações do PopUp para os textos
+        orientation: "vertical"     # Orientação
+        TextInput:                  # Widget: TextInput
+            id: txtinput            # Sua ID
+            text: root.obj_text     # Muda o texto
+        Button:             # Widget: Botão
+            size_hint: 1, 0.2               # Seu tamanho
+            text: "Salvar Mudancas"         # Seu texto
             on_release:
-                root.obj.update_changes(txtinput.text)
-                root.dismiss()
-        Button:
-            size_hint: 1, 0.2
-            text: "Cancelar"
-            on_release: root.dismiss()
+                root.obj.update_changes(txtinput.text)          # Quando pressionado ativa a função 'update_changes'
+                root.dismiss()                                  # Fecha o PopUp
+        Button:              # Widget: Botão
+            size_hint: 1, 0.2               # Seu tamanho
+            text: "Cancelar"                # Seu texto
+            on_release: root.dismiss()      # Fecha o PopUp
 
-<SelectableButton>:
-    # Draw a background to indicate selection
-    size_hint: 0.7, 0.15
+<SelectableButton>:                 # Desenha um backgound para indicar a seleção
+    size_hint: 0.7, 0.15                # Seu tamanho
     canvas.before:
         Color:
-            rgba: (.0, 0.9, .1, .3) if self.selected else (0, 0, 0, 1)
+            rgba: (.0, 0.9, .1, .3) if self.selected else (0, 0, 0, 1)          # Sua cor e sua cor quando selecionado
         Rectangle:
             pos: self.pos
             size: self.size
 
-<RV>:
-    BoxLayout:
+<RV>:                       # RecycleView
+    BoxLayout:              # Configuração da tela
         canvas:
             Rectangle:
-                source: 'bg.jpg'
+                source: 'bg.jpg'            # Bakcground
                 size: self.size
-        orientation: "vertical"
+        orientation: "vertical"             # Orientação
 
-        ActionBar:
+        ActionBar:                          # Barra superior para realizar ações
             ActionView:
                 ActionPrevious:
-                    title: 'VOLTAR'
+                    title: 'VOLTAR'             # Seu Texto
                     with_previous: True
-                    app_icon: 'camera.png'
-                    height: '3dp'
-                    on_release: root.manager.current = 'Screen2'
+                    app_icon: 'camera.png'      # Seu icone
+                    height: '3dp'               # Seu tamanho
+                    on_release: root.manager.current = 'Screen2'            # Se Pressionar retorna para a tela 2
 
-        GridLayout:
+        GridLayout:                         # Cria um GridLayout dentro do BoxLayout 
             size_hint: 1, None
             size_hint_y: None
-            height: 25
-            cols: 1
+            height: 25                      # Seu tamanho
+            cols: 1                         # Colunas: 1
             BoxLayout:
-                orientation: 'horizontal'
-                spacing: 2
+                orientation: 'horizontal'           # Orientação
+                spacing: 2                          # Espaçamento
                 Label:
-                    text: ""
+                    text: ""                        # Texto vazio para dar espaço
                 Label:
-                    text: "Nome do Filme"
+                    text: "Nome do Filme"           # Texto para indicar que aquela coluna é o nome do filme
                 Label:
-                    text: "Diretor"
+                    text: "Diretor"                 # Texto para indicar que aquela coluna é o nome do diretor
                 Label:
-                    text: "Lancamento"
+                    text: "Lancamento"              # Texto para indicar que aquela coluna é a data de lançamento
                 Label:
-                    text: "Valor Arrecadado"
+                    text: "Valor Arrecadado"        # Texto para indicar que aquela coluna é o valor arrecadado
                 Label:
-                    text: "Nota"
+                    text: "Nota"                    # Texto para indicar que aquela coluna é a nota do filme
                 Label:
-                    text: "Genero"
+                    text: "Genero"                  # Texto para indicar que aquela coluna é o genero do filme
 
         BoxLayout:
-            RecycleView:
-                viewclass: 'SelectableButton'
-                data: [{'text': str(x)} for x in root.data_list]
-                scroll_type: ['bars', 'content']
+            RecycleView:                # Listar Widgets
+                viewclass: 'SelectableButton'                               # Modo de visualização
+                data: [{'text': str(x)} for x in root.data_list]            # Dados quem vem da lista 'data_list'
+                scroll_type: ['bars', 'content']                            # Tipo de Scroolagem
                 scroll_wheel_distance: dp(400)
                 bar_width: dp(30)
-                SelectableRecycleGridLayout:
-                    cols: 7
-                    default_size: None, dp(40)
+                SelectableRecycleGridLayout:                            # Classe SelectableRecycleGridLayout
+                    cols: 7                                             # Numero de Colunas
+                    default_size: None, dp(40)                          
                     default_size_hint: 1, None
                     size_hint_y: None
-                    height: self.minimum_height
-                    orientation: 'vertical'
+                    height: self.minimum_height                         # Tamanho 
+                    orientation: 'vertical'                             # Orientação
                     multiselect: True
                     touch_multiselect: True
-                    spacing: dp(2)
+                    spacing: dp(2)                                      # Espaçamento

@@ -110,8 +110,7 @@ class TextInputPopup(Popup):            #Popup para mudar os valores dos filmes 
         self.obj = obj
         self.obj_text = obj.text
 
-class SelectableRecycleGridLayout(FocusBehavior, LayoutSelectionBehavior, RecycleGridLayout):           #Cria um Gridlayour para o RV
-    # Adiciona um focus behaviour to the view
+class SelectableRecycleGridLayout(FocusBehavior, LayoutSelectionBehavior, RecycleGridLayout):           #Cria um Gridlayour para o RV e adiciona um Focus behaviour para a tela
     pass
 
 class SelectableButton(RecycleDataViewBehavior, Button):            #Botões onde serão escrito os dados
@@ -143,7 +142,7 @@ class SelectableButton(RecycleDataViewBehavior, Button):            #Botões ond
     def update_changes(self, txt):          #Vai atualizar as mudanças
         self.text = txt
 
-class RV(RecycleView, Screen):          #Tela com o RecycleView
+class RV(RecycleView, Screen):          #Tela com o RecycleView que apresenta uma lista de Widgets
     data_list = ListProperty([])
 
     def __init__(self, **kwargs):           #Construtor da classe
